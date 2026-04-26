@@ -1,131 +1,126 @@
 import Link from "next/link";
-import { Mail, MapPin, ExternalLink, Share2 } from "lucide-react";
+import { Mail, MapPin, ArrowUpRight } from "lucide-react";
 
-const solutions = [
-  { label: "Pay at Table", href: "/solutions#pay-at-table" },
-  { label: "Order & Pay", href: "/solutions#order-and-pay" },
-  { label: "Digital Menu", href: "/solutions#digital-menu" },
-];
-const company = [
-  { label: "About Us", href: "/about" },
-  { label: "Careers", href: "/about#careers" },
-  { label: "Press", href: "/about#press" },
-];
+const NAV = {
+  Solutions: [
+    { label: "Pay at Table",  href: "/solutions#pay-at-table"  },
+    { label: "Order & Pay",   href: "/solutions#order-and-pay" },
+    { label: "Digital Menu",  href: "/solutions#digital-menu"  },
+    { label: "Integrations",  href: "/solutions#integrations"  },
+  ],
+  Company: [
+    { label: "About Us",  href: "/about"         },
+    { label: "Careers",   href: "/about#careers" },
+    { label: "Press",     href: "/about#press"   },
+    { label: "Blog",      href: "/about#blog"    },
+  ],
+  Contact: [
+    { label: "hello@payli.tech",     href: "mailto:hello@payli.tech", icon: Mail     },
+    { label: "Dubai, UAE",           href: "#",                        icon: MapPin   },
+  ],
+};
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-mint/10 pt-16 pb-8 overflow-hidden">
-      {/* Ambient glow */}
+    <footer className="relative border-t overflow-hidden" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
+      {/* Ambient */}
       <div
-        className="ambient-blob animate-glow w-96 h-96 -bottom-32 -left-16"
-        style={{ background: "rgba(19,106,111,0.15)" }}
+        className="blob absolute w-[600px] h-[400px] -bottom-40 -left-20 opacity-20 animate-glow"
+        style={{ background: "radial-gradient(ellipse, rgba(19,106,111,0.2) 0%, transparent 70%)" }}
         aria-hidden="true"
       />
 
-      <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-white/5">
+      <div className="relative mx-auto max-w-7xl px-5 md:px-10 pt-16 pb-8">
+
+        {/* Top row */}
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-12 pb-14 border-b" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
+
           {/* Brand */}
-          <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg btn-primary flex items-center justify-center shrink-0">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="9" stroke="#021F25" strokeWidth="2" fill="none"/>
-                  <path d="M9 8v8M15 8v8M9 12h6" stroke="#021F25" strokeWidth="2" strokeLinecap="round"/>
+          <div>
+            <Link href="/" className="flex items-center gap-2.5 mb-5 group w-fit">
+              <div
+                className="w-8 h-8 rounded-[10px] flex items-center justify-center transition-shadow duration-300 group-hover:shadow-[0_0_16px_rgba(26,217,173,0.4)]"
+                style={{ background: "linear-gradient(135deg, #1AD9AD 0%, #18b896 100%)" }}
+              >
+                <svg width="15" height="15" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M4 4v10M9 4v10M14 4v10M4 9h10" stroke="#020c10" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </div>
-              <span className="text-lg font-bold text-white">
-                Pay<span className="gradient-text">li</span>
+              <span className="text-[1.125rem] font-[800] tracking-[-0.03em] text-white">
+                Pay<span style={{
+                  background: "linear-gradient(125deg, #1AD9AD, #25AA98)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}>li</span>
               </span>
             </Link>
-            <p className="text-sm text-white/50 leading-relaxed mb-5">
-              The bill without the wait. QR-powered payments for modern restaurants.
+
+            <p className="text-sm text-white/40 leading-relaxed mb-6 max-w-[260px]">
+              The bill without the wait. QR-powered payments that give restaurants 15 minutes back per table.
             </p>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://linkedin.com"
-                aria-label="Payli on LinkedIn"
-                className="w-9 h-9 rounded-xl glass-light flex items-center justify-center text-white/50 hover:text-mint hover:border-mint/30 transition-all"
-              >
-                <ExternalLink size={15} />
-              </a>
-              <a
-                href="https://twitter.com"
-                aria-label="Payli on X / Twitter"
-                className="w-9 h-9 rounded-xl glass-light flex items-center justify-center text-white/50 hover:text-mint hover:border-mint/30 transition-all"
-              >
-                <Share2 size={15} />
-              </a>
+
+            {/* Social */}
+            <div className="flex gap-2">
+              {[
+                { label: "LinkedIn", href: "https://linkedin.com" },
+                { label: "X",        href: "https://x.com"        },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={`Payli on ${s.label}`}
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-white/35 hover:text-white/80 transition-colors"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+                >
+                  <span className="text-[11px] font-[700]">{s.label[0]}</span>
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Solutions */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-mint/60 mb-5">Solutions</h3>
-            <ul className="space-y-3">
-              {solutions.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="text-sm text-white/50 hover:text-white transition-colors"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-mint/60 mb-5">Company</h3>
-            <ul className="space-y-3">
-              {company.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="text-sm text-white/50 hover:text-white transition-colors"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-mint/60 mb-5">Contact</h3>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="mailto:hello@payli.tech"
-                  className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
-                >
-                  <Mail size={14} className="text-mint/50 shrink-0" />
-                  hello@payli.tech
-                </a>
-              </li>
-              <li>
-                <span className="flex items-start gap-2 text-sm text-white/50">
-                  <MapPin size={14} className="text-mint/50 shrink-0 mt-0.5" />
-                  Dubai, UAE
-                </span>
-              </li>
-            </ul>
-          </div>
+          {/* Nav columns */}
+          {(Object.entries(NAV) as [string, { label: string; href: string; icon?: React.ElementType }[]][]).map(([section, links]) => (
+            <div key={section}>
+              <h3 className="eyebrow mb-5">{section}</h3>
+              <ul className="space-y-3">
+                {links.map((l) => {
+                  const Icon = l.icon;
+                  return (
+                    <li key={l.label}>
+                      <Link
+                        href={l.href}
+                        className="group flex items-center gap-2 text-sm text-white/40 hover:text-white/80 transition-colors"
+                      >
+                        {Icon && <Icon size={13} className="shrink-0 text-white/25" />}
+                        {l.label}
+                        {l.href.startsWith("mailto") && (
+                          <ArrowUpRight size={11} className="opacity-0 group-hover:opacity-50 transition-opacity" />
+                        )}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
         </div>
 
+        {/* Bottom row */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30">
-            © {new Date().getFullYear()} Payli. All rights reserved.
+          <p className="text-xs text-white/20">
+            © {new Date().getFullYear()} Payli Technologies LLC. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-xs text-white/30 hover:text-white/60 transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-xs text-white/30 hover:text-white/60 transition-colors">
-              Terms of Service
-            </Link>
+          <div className="flex items-center gap-5">
+            {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((l) => (
+              <Link
+                key={l}
+                href="#"
+                className="text-xs text-white/20 hover:text-white/45 transition-colors"
+              >
+                {l}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
